@@ -1,0 +1,30 @@
+.navbar{
+    background: rgb(2,0,36);
+    background: linear-gradient(90deg, rgba(2,0,36,0.7) 0%, rgba(199,191,191,1) 35%, rgba(199,191,191,1) 70%, rgba(2,0,36,0.7) 100%);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 30;
+    font-weight: bold;
+    justify-content: center;
+    color: #000000;
+}
+
+.column_left {
+  border-right: 5px dashed #c7bfbf;
+}
+
+.column_right {
+  border-right: 4px dotted #c7bfbf;
+}
+
+.upload_box {
+    width: 50%;
+    height: 50px;
+    text-align: center;
+    border-style: dotted;
+    background: #e0e0eb;
+}
+
+.labels {
+    font-style: italic;
+    font-size: 26;
+}
