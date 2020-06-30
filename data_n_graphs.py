@@ -31,7 +31,8 @@ def parse_contents(contents, filename):
         ])
 
     col_names = df.columns
-    the_col_names = [{'label': i, 'value': i} for i in col_names]
+
+    the_col_names = [{'label': i + ' (' + str(df[i].dtypes) + ')', 'value': i} for i in col_names]
     the_df = df.to_json(date_format='iso', orient='split')
     
     

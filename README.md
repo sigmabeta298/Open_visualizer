@@ -37,7 +37,7 @@ Run `python index.py`
 
 *v1.5*
 - [ ] Color options
-- [ ] Data type of columns
+- [x] Data type of columns
 - [ ] Axis labels
 - [ ] Graph titles
 
