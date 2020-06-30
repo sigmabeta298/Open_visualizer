@@ -27,13 +27,15 @@ def update_output(contents, filename):
               [Input('data_df', 'children'),
                Input('x-dropdown', 'value'),
                Input('y-dropdown', 'value'),
-               Input('grf_typ', 'value')],
+               Input('grf_typ', 'value'),
+               Input('my-color-picker', 'value')],
               [State('x-dropdown', 'value'),
                State('y-dropdown', 'value')])
-def update_dds(df, x,y, gtyp, x_state, y_state):
+def update_dds(df, x, y, gtyp, sel_color, x_state, y_state):
     if not (x_state and y_state):
         raise PreventUpdate
-    grf_obj = grf.plot_grf(df, x, y, gtyp)
+    grf_obj = grf.plot_grf(df, x, y, gtyp, sel_color)
     sel_txt = 'You have selected ' + x + ' and ' + y
-    return sel_txt, grf_obj
     
+    return sel_txt, grf_obj
+  

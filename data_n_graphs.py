@@ -45,19 +45,22 @@ def parse_contents(contents, filename):
     
     return table, the_col_names, the_df
 
-def plot_grf(df_json, x_col, y_col, grf_typ):
+def plot_grf(df_json, x_col, y_col, grf_typ, sel_color):
     df = pd.read_json(df_json, orient='split')
     
     if grf_typ == 'scatter':
-        fig = go.Figure(data=go.Scatter(x=df[x_col], y=df[y_col], mode='markers'))
+        fig = go.Figure(data=go.Scatter(x=df[x_col], y=df[y_col], 
+                                        mode='markers', 
+                                        marker_color= sel_color['hex']))
     elif grf_typ == 'line':
-        fig = go.Figure(data=go.Scatter(x=df[x_col], y=df[y_col]))
+        fig = go.Figure(data=go.Scatter(x=df[x_col], y=df[y_col], 
+                                        line=dict(color=sel_color['hex'])))
     else:
-        fig = go.Figure([go.Bar(x=df[x_col], y=df[y_col])])
-    
+        fig = go.Figure([go.Bar(x=df[x_col], y=df[y_col],
+                                marker_color=sel_color['hex'])])
+
     grf_comp = dcc.Graph(
             id='main_grf',
             figure=fig
         )
     return grf_comp
-

@@ -36,7 +36,7 @@ Run `python index.py`
 - [x] Graph display
 
 *v1.5*
-- [ ] Color options
+- [X] Color options
 - [x] Data type of columns
 - [ ] Axis labels
 - [ ] Graph titles

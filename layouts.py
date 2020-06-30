@@ -8,6 +8,7 @@ Created on Sat Jun 27 15:37:40 2020
 import dash_core_components as dcc
 import dash_bootstrap_components as dbc
 import dash_html_components as html
+import dash_daq as daq
 import data_n_graphs as grf
 
 title = html.Div([
@@ -54,18 +55,24 @@ center_col = dbc.Col([
 ], width=7, className='column_right')
 
 rightside_col = dbc.Col([
-   html.Div("Select Graph Type", className='labels'),
+    html.Div("Select Graph Type", className='labels'),
    
-       dcc.RadioItems(
-           id='grf_typ',
-           options=[
-                {'label': 'Bar', 'value': 'bar'},
-                {'label': 'Scatter', 'value': 'scatter'},
-                {'label': 'Line', 'value': 'line'}
-            ],
-           value='bar',
-           labelStyle={"display": "block"},
-       )
+    dcc.RadioItems(
+        id='grf_typ',
+        options=[
+             {'label': 'Bar', 'value': 'bar'},
+             {'label': 'Scatter', 'value': 'scatter'},
+             {'label': 'Line', 'value': 'line'}
+         ],
+        value='bar',
+        labelStyle={"display": "block"},
+    ),
+    
+    daq.ColorPicker(
+        id='my-color-picker',
+        label='Color Picker',
+        value=dict(hex='#2a20aa')
+    ),
 
 ], width=2)
 
