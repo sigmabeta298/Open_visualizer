@@ -8,6 +8,10 @@ __Author__:
 
 Syamanthaka B
 
+__Current version__:
+
+v1.5
+
 ### Description
 
 On running the application, a browser opens up, with an option to upload user file.
@@ -38,8 +42,8 @@ Run `python index.py`
 *v1.5*
 - [X] Color options
 - [x] Data type of columns
-- [ ] Axis labels
-- [ ] Graph titles
+- [x] Axis labels
+- [x] Graph titles
 
 *v2.0
 - [ ] Multiple lines

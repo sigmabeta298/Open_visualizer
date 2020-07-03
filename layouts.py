@@ -73,6 +73,9 @@ rightside_col = dbc.Col([
         label='Color Picker',
         value=dict(hex='#2a20aa')
     ),
+    dcc.Input(id='main_title', type='text', value='', placeholder='Main Title'),
+    dcc.Input(id='xtitle', type='text', value='', placeholder='X axis'),
+    dcc.Input(id='ytitle', type='text', value='', placeholder='Y axis'),
 
 ], width=2)
 

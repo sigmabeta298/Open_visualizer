@@ -23,19 +23,32 @@ def update_output(contents, filename):
         return contents_df, cols, cols, the_df
 
 @app.callback([Output('selected_cols', 'children'),
-               Output('output_grf', 'children')],
+               Output('output_grf', 'children'),
+               Output('main_title', 'placeholder'),
+               Output('xtitle', 'placeholder'),
+               Output('ytitle', 'placeholder')
+               ],
               [Input('data_df', 'children'),
                Input('x-dropdown', 'value'),
                Input('y-dropdown', 'value'),
                Input('grf_typ', 'value'),
-               Input('my-color-picker', 'value')],
+               Input('my-color-picker', 'value'),
+               Input('main_title', 'value'),
+               Input('xtitle', 'value'),
+               Input('ytitle', 'value')
+              ],
               [State('x-dropdown', 'value'),
                State('y-dropdown', 'value')])
-def update_dds(df, x, y, gtyp, sel_color, x_state, y_state):
+def update_dds(df, x, y, gtyp, sel_color, mtitle_val, xtitle_val, ytitle_val, x_state, y_state):
     if not (x_state and y_state):
         raise PreventUpdate
-    grf_obj = grf.plot_grf(df, x, y, gtyp, sel_color)
+    
+    main_title = mtitle_val if mtitle_val != '' else x + ' vs ' + y
+    xtitle = xtitle_val if xtitle_val != '' else x
+    ytitle = ytitle_val if ytitle_val != '' else y
+    
+    grf_obj = grf.plot_grf(df, x, y, gtyp, sel_color, main_title, xtitle, ytitle)
     sel_txt = 'You have selected ' + x + ' and ' + y
     
-    return sel_txt, grf_obj
+    return sel_txt, grf_obj, main_title, xtitle, ytitle
   
