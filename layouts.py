@@ -49,25 +49,26 @@ center_col = dbc.Col([
     ),
     
     html.Div(id='data_df', style={'display': 'none'}), #Hidden div to store uploaded data
-    html.Div(id='selected_cols'),
+    html.Div(id='selected_cols', className='info_user'),
     html.Div(id='output_grf'),
     html.Div(id='output-data-upload'), #Data display, can be removed later
 ], width=7, className='column_right')
 
 rightside_col = dbc.Col([
     html.Div("Select Graph Type", className='labels'),
-   
-    dcc.RadioItems(
+    dcc.Dropdown(
         id='grf_typ',
         options=[
-             {'label': 'Bar', 'value': 'bar'},
-             {'label': 'Scatter', 'value': 'scatter'},
-             {'label': 'Line', 'value': 'line'}
-         ],
+              {'label': 'Bar', 'value': 'bar'},
+              {'label': 'Scatter', 'value': 'scatter'},
+              {'label': 'Line', 'value': 'line'},
+              {'label': 'Pie', 'value': 'pie'}
+          ],
         value='bar',
-        labelStyle={"display": "block"},
+        disabled=False
     ),
-    
+   
+    html.Div(id='dd_val'),
     daq.ColorPicker(
         id='my-color-picker',
         label='Color Picker',

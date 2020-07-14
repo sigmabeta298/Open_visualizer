@@ -10,6 +10,7 @@ import base64
 import io
 import dash_html_components as html
 import dash_core_components as dcc
+from scripts import graph_rules as grules
 
 import dash_table
 
@@ -45,18 +46,43 @@ def parse_contents(contents, filename):
     
     return table, the_col_names, the_df
 
-def plot_grf(df_json, x_col, y_col, grf_typ, sel_color, mtitle, xtitle, ytitle):
+def plot_grf(df_json, x_col, y_col, grf_typ_ud, sel_color, mtitle, xtitle, ytitle):
     df = pd.read_json(df_json, orient='split')
+    
+    # Get a graph type from the graph rules
+    grf_type, grf_others, grf_name = grules.graph_type(df, x_col, y_col)
+    
+    #See if user selection is a viable option to plot
+    if grf_typ_ud != grf_name: #User selection is not recommended
+        
+        #check if grf_type present in grf_others
+        if grf_typ_ud in grf_others:
+            grf_type = grf_typ_ud #Set graph type for plotting
+            grf_name = grf_typ_ud #Set graph name for changing dropdown
+        else:
+            grf_comp = html.Div(children=
+                "Sorry this cannot be plotted. We recommend " + grf_name,
+                className='error_txt'
+            )
+            return grf_comp, grf_typ_ud
+            
+    
     
     fig = go.Figure()
     
-    if grf_typ == 'scatter':
+    if grf_type == 'scatter':
         fig.add_trace(go.Scatter(x=df[x_col], y=df[y_col], 
                                         mode='markers', 
                                         marker_color= sel_color['hex']))
-    elif grf_typ == 'line':
+    elif grf_type == 'line':
         fig.add_trace(go.Scatter(x=df[x_col], y=df[y_col], 
                                         line=dict(color=sel_color['hex'])))
+    elif grf_type == 'pie':
+        fig.add_trace(go.Pie(labels=df[x_col], values=df[y_col]))
+    elif grf_type == 'simple_bar_horizontal':
+        fig.add_trace(go.Bar(x=df[x_col], y=df[y_col],
+                                marker_color=sel_color['hex'], 
+                                orientation='h'))
     else:
         fig.add_trace(go.Bar(x=df[x_col], y=df[y_col],
                                 marker_color=sel_color['hex']))
@@ -66,9 +92,10 @@ def plot_grf(df_json, x_col, y_col, grf_typ, sel_color, mtitle, xtitle, ytitle):
         xaxis_title = xtitle,
         yaxis_title = ytitle
     )
+    
 
     grf_comp = dcc.Graph(
             id='main_grf',
             figure=fig
         )
-    return grf_comp
+    return grf_comp, grf_name

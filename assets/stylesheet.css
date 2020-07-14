@@ -28,3 +28,12 @@
     font-style: italic;
     font-size: 26;
 }
+
+.error_txt{
+    font-style: italic;
+    color: #ff0000;
+}
+
+.info_user {
+    color: #adad85;
+}

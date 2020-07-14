@@ -45,11 +45,11 @@ Run `python index.py`
 - [x] Axis labels
 - [x] Graph titles
 
-*v2.0
+*v2.0*
+- [x] Smart suggestion for graph
+- [x] More graph types
+
+*v3.0
 - [ ] Multiple lines
 - [ ] Multiple y axes
-
-*v3.0*
-- [ ] Smart suggestion for graph
-- [ ] More graph types
 

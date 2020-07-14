@@ -26,7 +26,8 @@ def update_output(contents, filename):
                Output('output_grf', 'children'),
                Output('main_title', 'placeholder'),
                Output('xtitle', 'placeholder'),
-               Output('ytitle', 'placeholder')
+               Output('ytitle', 'placeholder'),
+               Output('dd_val', 'value')
                ],
               [Input('data_df', 'children'),
                Input('x-dropdown', 'value'),
@@ -38,17 +39,23 @@ def update_output(contents, filename):
                Input('ytitle', 'value')
               ],
               [State('x-dropdown', 'value'),
-               State('y-dropdown', 'value')])
+               State('y-dropdown', 'value')
+              ])
 def update_dds(df, x, y, gtyp, sel_color, mtitle_val, xtitle_val, ytitle_val, x_state, y_state):
     if not (x_state and y_state):
         raise PreventUpdate
-    
+
     main_title = mtitle_val if mtitle_val != '' else x + ' vs ' + y
     xtitle = xtitle_val if xtitle_val != '' else x
     ytitle = ytitle_val if ytitle_val != '' else y
     
-    grf_obj = grf.plot_grf(df, x, y, gtyp, sel_color, main_title, xtitle, ytitle)
+    grf_obj, grf_typ_new =  grf.plot_grf(df, x, y, gtyp, sel_color, main_title, xtitle, ytitle)
     sel_txt = 'You have selected ' + x + ' and ' + y
     
-    return sel_txt, grf_obj, main_title, xtitle, ytitle
-  
+    return sel_txt, grf_obj, main_title, xtitle, ytitle, grf_typ_new
+ 
+@app.callback(Output('grf_typ', 'value'),
+              [Input('dd_val', 'value')])
+def update_bar_type(hidden_val):
+    return hidden_val
+              
