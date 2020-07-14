@@ -10,19 +10,30 @@ Syamanthaka B
 
 __Current version__:
 
-v1.5
+v2.0
 
 ### Description
 
 On running the application, a browser opens up, with an option to upload user file.
 A drag and drop or browse to select option is provided. 
 Once the user uploads the file, currently only csv files, it populates the columns on the left panel, for selection.
-In this initial v1.0 version, no checks are being done on the columns themselves. 
+The column data type is also shown in the dropdowns for ease of selection.
 
 The user then choses what is to be plotted on x and y axes, from the freshly populated drop downs.
-The graph is then displayed on the center panel, with the default graph type being bar.
+The graph is then displayed on the center panel. The default graph is carefully selected
+using a rule based recommender system
 
-The graph type can be changed using the radio button the right, with currently 3 options available.
+The graph type can be changed using the drop down the right, with currently 4 options available. 
+But if the selected type is not possible for the columns selected, then an error message is displayed,
+along with a recommendation. 
+
+Color of the graphs can be changed using a color picker on the right. Currently this is not possible
+for the pie chart though. 
+
+A default title and labels for the axes are provided to the user based on the columns selected.
+However, these can be updated with custom title and labels using text input boxes on the right panel.
+
+Keep a watch for upcoming versions, or suggest new features :-)
 
 ### How to
 
